@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
+using todo.Data;
 
 namespace todo.Web
 {
@@ -28,6 +30,11 @@ namespace todo.Web
         {
 
             services.AddControllers();
+            services.AddDbContext<TodoDbContext>(options=>{
+                options.EnableDetailedErrors();
+                options.UseNpgsql(Configuration.GetConnectionString("todo.dev"));
+            });
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "todo.Web", Version = "v1" });
