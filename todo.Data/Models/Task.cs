@@ -1,7 +1,10 @@
+using System;
+
 namespace todo.Data.Models
 {
-    public class Task
+    public class Task:BaseStructure
     {
+        
         
     }
 }
